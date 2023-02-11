@@ -32,10 +32,10 @@ function getData(type, length) {
 const showMap = () => {
     let output = ""
     output += `
-        <div class="card" style="transform: rotateX(60deg) perspective(30cm)">
+        <div class="card" style="transform: rotateX(60deg) perspective(300px)">
             <img class="card--img" src=${map_link} />
         </div>
-        `
+        ` //change rot
     container.innerHTML = output
 }
 
@@ -49,17 +49,17 @@ document.addEventListener("DOMContentLoaded", writeWebsite)
 /*Mouse Dragging*/
 
 function dragElement(element) {
-    var pos1 = 0, pos2 = 0;
-    element.onmousedown = dragMouseDown;
+  var deg = 0
+  var pos1 = 0
+  var pos2 = 0
+  var pos3 = 0
+  element.onmousedown = dragMouseDown;
 
   function dragMouseDown(e) {
     e = e || window.event;
     e.preventDefault();
-    // get the mouse cursor position at startup:
-    pos3 = e.clientX;
-    pos4 = e.clientY;
+    pos2 = e.clientX;
     document.onmouseup = closeDragElement;
-    // call a function whenever the cursor moves:
     document.onmousemove = elementDrag;
   }
 
@@ -67,11 +67,13 @@ function dragElement(element) {
     e = e || window.event;
     e.preventDefault();
     // calculate the new cursor position:
-    pos1 = pos2 - e.clientX;
-    pos2 = e.clientX;
+    pos1 = pos2 - e.clientX
+    pos2 = e.clientX
+    pos3 = e.clientY - (element.offsetTop + element.offsetHeight - (element.offsetTop + element.offsetHeight) / 2)
+    deg += (pos3 > 0 ? 1 : -1) * pos1
     // set the element's new position:
     var str = element.style.transform.split(" ")
-    var zDeg = "rotateZ("+pos2+"deg)"
+    var zDeg = "rotateZ("+deg+"deg)"
     if(str.length >= 2){
         str[2] = zDeg
     }
@@ -79,7 +81,6 @@ function dragElement(element) {
         str.push(zDeg)
     }
     str = str.join(" ")
-    console.log(str)
     element.style.transform = str
     console.log(element.style.transform)
   }
