@@ -84,13 +84,6 @@ const showMap = () => {
     container.innerHTML = output
 }
 
-const writeTest = (instring) => {
-    let output = ""
-    output += "<p>"+instring+"</p>"
-    test.innerHTML = output
-}
-document.addEventListener("DOMContentLoaded", writeWebsite)
-
 /*Mouse Dragging*/
 
 function dragElement(element) {
