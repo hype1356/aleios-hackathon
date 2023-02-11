@@ -34,13 +34,9 @@ h1 {
   margin-bottom: 0.5rem;
 }
 .container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
-  grid-gap: 1rem;
-  justify-content: center;
-  align-items: center;
+  display: inline-block;
+  padding: 1rem;
   margin: auto;
-  padding: 1rem 0;
 }
 input[type=button] {
   background-color: #4CAF50;
@@ -59,11 +55,13 @@ input[type=button]:hover {
   background-color: #488c41;
   color: white;
 }
-/*.card {
-  transform: perspective(30cm) rotateX(69deg);
-}*/
 .card--img {
   border-radius: 50%;
+}
+.bars {
+  display: inline-block;
+  z-index = 1;
+  position: absolute;
 }
 .table-container {
   margin: auto;
