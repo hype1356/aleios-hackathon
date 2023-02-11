@@ -1,0 +1,22 @@
+{
+  "name": "campusenergy",
+  "version": "1.0.0",
+  "description": "Hackathon Project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hype1356/aleios-hackathon.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hype1356/aleios-hackathon/issues"
+  },
+  "homepage": "https://github.com/hype1356/aleios-hackathon#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
