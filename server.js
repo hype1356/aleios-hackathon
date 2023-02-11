@@ -16,7 +16,10 @@ app.get('/', (req, res) => {
   res.sendFile(__dirname + "/frontend/index.html");
 })
 
-app.get('/data')
+app.get('/data/day', (req, res) => {
+  console.log("test")
+  res.json({test})
+})
 
 app.listen(port, () => {
   console.log("listening on port 3000")

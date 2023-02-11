@@ -5,7 +5,10 @@ const http = new XMLHttpRequest()
 
 const writeWebsite = () => {
     showMap()
-    writeTest()
+}
+
+function electricity() {
+    
 }
 
 const showMap = () => {
@@ -18,9 +21,9 @@ const showMap = () => {
     container.innerHTML = output
 }
 
-const writeTest = () => {
+const writeTest = (instring) => {
     let output = ""
-    output += "<p>FETCH TEXT IN HERE</p>"
+    output += "<p>"+instring+"</p>"
     test.innerHTML = output
 }
 document.addEventListener("DOMContentLoaded", writeWebsite)
