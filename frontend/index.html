@@ -10,13 +10,19 @@
     <main>
         <nav>
             <tr>
-                <td><input type="button" value="Electricity" onclick="getData('electricity','day');"/></td>
-                <td><input type="button" value="Gas" onclick="getData('gas','day');"/></td>
-                <td><input type="button" value="Water" onclick="getData('water','day');"/></td>
+                <td><input type="button" value="Electricity" onclick="changeType('electricity')"/></td>
+                <td><input type="button" value="Gas" onclick="changeType('gas')"/></td>
+                <td><input type="button" value="Water" onclick="changeType('water')"/></td>
             </tr>
         </nav>
         <div class="container"></div>
-        <div class="test"></div>
+        <div>
+            <input type="button" value="24H" onclick="changeLength('day')"/>
+            <input type="button" value="1W" onclick="changeLength('week')"/>
+            <input type="button" value="1M" onclick="changeLength('month')"/>
+            <input type="button" value="1Y" onclick="changeLength('year')"/>
+            <h1 id="currLength">24H</h1>
+        </div>
         <div class="dataTable-container">
             <table id="dataTable">
                 <thead>

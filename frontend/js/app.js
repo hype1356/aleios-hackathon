@@ -5,6 +5,8 @@ const http = new XMLHttpRequest()
 var table = document.getElementById("dataTable").getElementsByTagName("tbody")[0]
 var tableButtons = document.querySelectorAll("th button")
 var data = []
+var length = "day";
+var type = "electricity"
 
 
 const writeWebsite = () => {
@@ -12,7 +14,31 @@ const writeWebsite = () => {
     dragElement(document.querySelector(".card"))
 }
 
-function getData(type, length) {
+function changeLength(leng) {
+    length = leng
+    switch(leng) {
+        case "day":
+            document.getElementById("currLength").innerHTML = "24H"
+            break
+        case "week":
+            document.getElementById("currLength").innerHTML = "7D"
+            break
+        case "month":
+            document.getElementById("currLength").innerHTML = "1M"
+            break
+        case "year":
+            document.getElementById("currLength").innerHTML = "1Y"
+            break
+    }
+    getData()
+}
+
+function changeType(typ) {
+    type = typ
+    getData()
+}
+
+function getData() {
     url = "/data/" + type + "/" + length
     http.open("GET", url, true);
     http.onreadystatechange = function() {
@@ -34,32 +60,6 @@ function getData(type, length) {
     };
     http.send();
 }
-
-const sortData = (data, param, direction = "asc") => {
-    table.innerHTML = '';
-    const sortedData =
-      direction == "asc"
-        ? [...data].sort(function (a, b) {
-            if (a[param] < b[param]) {
-              return -1;
-            }
-            if (a[param] > b[param]) {
-              return 1;
-            }
-            return 0;
-          })
-        : [...data].sort(function (a, b) {
-            if (b[param] < a[param]) {
-              return -1;
-            }
-            if (b[param] > a[param]) {
-              return 1;
-            }
-            return 0;
-          });
-  
-    getTableContent(sortedData);
-  };
   
   const resetButtons = (event) => {
     [...tableButtons].map((button) => {
@@ -130,3 +130,5 @@ function dragElement(element) {
     document.onmousemove = null;
   }
 }
+
+document.addEventListener("DOMContentLoaded", writeWebsite);
