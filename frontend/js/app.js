@@ -34,6 +34,15 @@ function changeLength(leng) {
 
 function changeType(typ) {
     type = typ
+    switch (typ) {
+      case "electricity":
+      case "gas":
+        document.getElementById("Usage").innerHTML = "Energy Usage (kWh)"
+        break
+      case "water":
+        document.getElementById("Usage").innerHTML = "Water Usage (L)"
+        break
+    }
     getData()
 }
 
