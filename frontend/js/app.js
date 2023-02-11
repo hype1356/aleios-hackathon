@@ -72,13 +72,14 @@ function getData() {
 
 const showMap = () => {
     let output = ""
-    let square = `<div class="square"style=height:10px;width:10px;background-color:blue></div>`
+    let square = `<div class="square"style=height:1000px;width:10px;background-color:blue></div>`
     output += `
         <div class="card" style="transform: rotateX(60deg) perspective(300px)">
-            <img class="card--img" src=${map_link} />
+            <img class="card--img" src=${map_link} \>
             <div class="bars">
 
             </div>
+            </img>
         </div>
         ` //change rot
     container.innerHTML = output
@@ -91,12 +92,16 @@ function dragElement(element) {
   var pos1 = 0
   var pos2 = 0
   var pos3 = 0
+  var pos4 = 0
+  var pos5 = 0
+  var pos6 = 0
   element.onmousedown = dragMouseDown;
 
   function dragMouseDown(e) {
     e = e || window.event;
     e.preventDefault();
     pos2 = e.clientX;
+    pos4 = e.clientY;
     document.onmouseup = closeDragElement;
     document.onmousemove = elementDrag;
   }
@@ -107,8 +112,12 @@ function dragElement(element) {
     // calculate the new cursor position:
     pos1 = pos2 - e.clientX
     pos2 = e.clientX
-    pos3 = e.clientY - (container.offsetTop + (container.offsetHeight / 2))
+    pos4 = pos5 - e.clientY
+    pos5 = e.clientY
+    pos3 = pos5 - (container.offsetTop + (container.offsetHeight / 2))
+    pos6 = pos2 - (container.offsetLeft + (container.offsetWidth / 2))
     deg += (pos3 > 0 ? 1 : -1) * pos1
+    deg += (pos6 < 0 ? 1 : -1) * pos4
     // set the element's new position:
     var str = element.style.transform.split(" ")
     var zDeg = "rotateZ("+deg+"deg)"
