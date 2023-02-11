@@ -19,13 +19,13 @@ app.get('/', (req, res) => {
 app.get('/data/:data/:length', (req, res) => {
   switch(req.params["data"]) {
     case "electricity":
-      res.send([1,2,3,4,5])
+      res.send([[1,2],[3,4],[5,6],[7,8],[9,10]])
       break
     case "gas":
-      res.send([2,3,4,5,6])
+      res.send([[1,2],[3,4],[5,6],[7,8],[9,10]])
       break
     case "water":
-      res.send([3,4,5,6,7])
+      res.send([[1,2],[3,4],[5,6],[7,8],[9,10]])
       break
     default:
       console.log("")
