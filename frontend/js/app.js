@@ -8,7 +8,6 @@ var data = []
 var length = "day";
 var type = "electricity"
 
-
 const writeWebsite = () => {
     showMap()
     dragElement(document.querySelector(".card"))
@@ -55,6 +54,7 @@ function getData() {
                 textj = document.createTextNode(i[1])
                 celli.appendChild(texti)
                 cellj.appendChild(textj)
+                row.innerHTML += "<div class='bar' style='height: 40px; width: "+(i[1]/values[0][1])*660+"px; background-color: blue'></div>"
             }
         }
     };
@@ -131,4 +131,4 @@ function dragElement(element) {
   }
 }
 
-document.addEventListener("DOMContentLoaded", writeWebsite);
+document.addEventListener("DOMContentLoaded", writeWebsite, getData());
