@@ -2,6 +2,8 @@ const container = document.querySelector(".container")
 const test = document.querySelector(".test")
 const map_link = "images/campus_map.png"
 const http = new XMLHttpRequest()
+var table = document.getElementById("dataTable")
+
 
 const writeWebsite = () => {
     showMap()
@@ -15,6 +17,13 @@ function getData(type, length) {
         if (http.readyState === XMLHttpRequest.DONE && http.status === 200) {
             var values = JSON.parse(http.responseText);
             console.log(values);
+            for (i in values) {
+                row = table.insertRow()
+                celli = row.insertCell()
+                cellj = row.insertCell()
+                celli.innerHTML("<h3>"+values[i][0]+"</h3>")
+                cellj.innerHTML("<h3>"+values[i][1]+"</h3>")
+            }
         }
     };
     http.send();
