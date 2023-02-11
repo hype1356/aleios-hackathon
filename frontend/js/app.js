@@ -2,7 +2,8 @@ const container = document.querySelector(".container")
 const test = document.querySelector(".test")
 const map_link = "images/campus_map.png"
 const http = new XMLHttpRequest()
-var table = document.getElementById("dataTable")
+var table = document.getElementById("dataTable").getElementsByTagName("tbody")[0]
+var tableButtons = document.querySelectorAll("th button")
 var data = []
 
 
@@ -19,10 +20,7 @@ function getData(type, length) {
             var values = JSON.parse(http.responseText);
             data = values
             console.log(data);
-            table.innerHTML = `<thead>
-            <th><h3>Buliding</h3></th>
-            <th><h3>Energy Usage</h3></th>
-        </thead>`;
+            table.innerHTML = '';
             for (let i of values) {
                 row = table.insertRow()
                 celli = row.insertCell()
@@ -36,6 +34,41 @@ function getData(type, length) {
     };
     http.send();
 }
+
+const sortData = (data, param, direction = "asc") => {
+    table.innerHTML = '';
+    const sortedData =
+      direction == "asc"
+        ? [...data].sort(function (a, b) {
+            if (a[param] < b[param]) {
+              return -1;
+            }
+            if (a[param] > b[param]) {
+              return 1;
+            }
+            return 0;
+          })
+        : [...data].sort(function (a, b) {
+            if (b[param] < a[param]) {
+              return -1;
+            }
+            if (b[param] > a[param]) {
+              return 1;
+            }
+            return 0;
+          });
+  
+    getTableContent(sortedData);
+  };
+  
+  const resetButtons = (event) => {
+    [...tableButtons].map((button) => {
+      if (button !== event.target) {
+        button.removeAttribute("data-dir");
+      }
+    });
+  };
+  
 
 const showMap = () => {
     let output = ""
