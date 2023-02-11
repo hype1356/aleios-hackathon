@@ -39,9 +39,13 @@ function getData(type, length) {
 
 const showMap = () => {
     let output = ""
+    let square = `<div class="square"style=height:10px;width:10px;background-color:blue></div>`
     output += `
         <div class="card" style="transform: rotateX(60deg) perspective(300px)">
             <img class="card--img" src=${map_link} />
+            <div class="bars">
+
+            </div>
         </div>
         ` //change rot
     container.innerHTML = output
@@ -77,11 +81,12 @@ function dragElement(element) {
     // calculate the new cursor position:
     pos1 = pos2 - e.clientX
     pos2 = e.clientX
-    pos3 = e.clientY - (element.offsetTop + element.offsetHeight - (element.offsetTop + element.offsetHeight) / 2)
+    pos3 = e.clientY - (container.offsetTop + (container.offsetHeight / 2))
     deg += (pos3 > 0 ? 1 : -1) * pos1
     // set the element's new position:
     var str = element.style.transform.split(" ")
     var zDeg = "rotateZ("+deg+"deg)"
+    deg %= 360
     if(str.length >= 2){
         str[2] = zDeg
     }
