@@ -3,6 +3,7 @@ const test = document.querySelector(".test")
 const map_link = "images/campus_map.png"
 const http = new XMLHttpRequest()
 var table = document.getElementById("dataTable")
+var data = []
 
 
 const writeWebsite = () => {
@@ -16,13 +17,20 @@ function getData(type, length) {
     http.onreadystatechange = function() {
         if (http.readyState === XMLHttpRequest.DONE && http.status === 200) {
             var values = JSON.parse(http.responseText);
-            console.log(values);
-            for (i in values) {
+            data = values
+            console.log(data);
+            table.innerHTML = `<thead>
+            <th><h3>Buliding</h3></th>
+            <th><h3>Energy Usage</h3></th>
+        </thead>`;
+            for (let i of values) {
                 row = table.insertRow()
                 celli = row.insertCell()
                 cellj = row.insertCell()
-                celli.innerHTML("<h3>"+values[i][0]+"</h3>")
-                cellj.innerHTML("<h3>"+values[i][1]+"</h3>")
+                texti = document.createTextNode(i[0])
+                textj = document.createTextNode(i[1])
+                celli.appendChild(texti)
+                cellj.appendChild(textj)
             }
         }
     };
