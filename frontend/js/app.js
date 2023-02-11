@@ -130,7 +130,6 @@ function dragElement(element) {
     }
     str = str.join(" ")
     element.style.transform = str
-    console.log(element.style.transform)
   }
 
   function closeDragElement() {
