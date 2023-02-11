@@ -1,6 +1,7 @@
 const container = document.querySelector(".container")
 const test = document.querySelector(".test")
 const map_link = "images/campus_map.png"
+const http = new XMLHttpRequest()
 
 const writeWebsite = () => {
     showMap()
@@ -21,6 +22,5 @@ const writeTest = () => {
     let output = ""
     output += "<p>FETCH TEXT IN HERE</p>"
     test.innerHTML = output
-
 }
 document.addEventListener("DOMContentLoaded", writeWebsite)
