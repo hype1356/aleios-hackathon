@@ -63,7 +63,9 @@ app.get('/data/:data/:length', (req, res) => {
   for (var key in data) {
     senddata.push([key, data[key][index]])
   }
-  senddata = senddata.sort()
+  senddata = senddata.sort(function(a, b) {
+    return b[1] - a[1];
+  })
   res.send(senddata)
 })
 
