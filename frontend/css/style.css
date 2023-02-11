@@ -23,10 +23,9 @@ main {
   text-align: center;
 }
 nav {
-  display: flex;
-  justify-content: space-between;
+  display: inline-block;
   align-items: center;
-  margin-right: 100%;
+  
 }
 ul {
   list-style: none;
