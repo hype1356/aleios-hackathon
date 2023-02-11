@@ -59,9 +59,9 @@ input[type=button]:hover {
   background-color: #488c41;
   color: white;
 }
-.card {
+/*.card {
   transform: perspective(30cm) rotateX(69deg);
-}
+}*/
 .card--img {
   border-radius: 50%;
 }

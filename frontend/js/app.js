@@ -23,7 +23,7 @@ function getData(type, length) {
 const showMap = () => {
     let output = ""
     output += `
-        <div class ="card">
+        <div class="card" style="transform: rotateX(60deg) perspective(30cm)">
             <img class="card--img" src=${map_link} />
         </div>
         `
@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", writeWebsite)
 /*Mouse Dragging*/
 
 function dragElement(element) {
-    var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+    var pos1 = 0, pos2 = 0;
     element.onmousedown = dragMouseDown;
 
   function dragMouseDown(e) {
@@ -58,13 +58,21 @@ function dragElement(element) {
     e = e || window.event;
     e.preventDefault();
     // calculate the new cursor position:
-    pos1 = pos3 - e.clientX;
-    pos2 = pos4 - e.clientY;
-    pos3 = e.clientX;
-    pos4 = e.clientY;
+    pos1 = pos2 - e.clientX;
+    pos2 = e.clientX;
     // set the element's new position:
-    element.style.transform = 'rotate(${element.offsetTop - pos2}deg)';
-    element.style.left = (element.offsetLeft - pos1) + "px";
+    var str = element.style.transform.split(" ")
+    var zDeg = "rotateZ("+pos2+"deg)"
+    if(str.length >= 2){
+        str[2] = zDeg
+    }
+    else{
+        str.push(zDeg)
+    }
+    str = str.join(" ")
+    console.log(str)
+    element.style.transform = str
+    console.log(element.style.transform)
   }
 
   function closeDragElement() {
