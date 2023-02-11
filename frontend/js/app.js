@@ -7,8 +7,16 @@ const writeWebsite = () => {
     showMap()
 }
 
-function electricity() {
-    
+function getData(type, length) {
+    url = "/data/" + type + "/" + length
+    http.open("GET", url, true);
+    http.onreadystatechange = function() {
+        if (http.readyState === XMLHttpRequest.DONE && http.status === 200) {
+            var values = JSON.parse(http.responseText);
+            console.log(values);
+        }
+    };
+    http.send();
 }
 
 const showMap = () => {

@@ -16,9 +16,20 @@ app.get('/', (req, res) => {
   res.sendFile(__dirname + "/frontend/index.html");
 })
 
-app.get('/data/day', (req, res) => {
-  console.log("test")
-  res.json({test})
+app.get('/data/:data/:length', (req, res) => {
+  switch(req.params["data"]) {
+    case "electricity":
+      res.send([1,2,3,4,5])
+      break
+    case "gas":
+      res.send([2,3,4,5,6])
+      break
+    case "water":
+      res.send([3,4,5,6,7])
+      break
+    default:
+      console.log("")
+  }
 })
 
 app.listen(port, () => {
