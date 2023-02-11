@@ -26,8 +26,6 @@ function readCSVFile() {
   })
 }
 
-readCSVFile()
-
 app.use(express.static(__dirname + "/frontend"));
 
 app.get('/', (req, res) => {
