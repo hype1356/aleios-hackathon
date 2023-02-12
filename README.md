@@ -1,7 +1,10 @@
 # aleios-hackathon
 Hackathon Project
+
 Theme: Improving Sustainability on Campus
+
 Idea: Heatmap of Energy/Water usage on Campus
+
 Implementation:
  -get data (dummy data, but should connect to an API)
  -write data
@@ -9,6 +12,7 @@ Implementation:
   -as bars on map
  -backend with javascript
  -frontend with javascript/html/css
+ 
 Use:
  -run server.js using node.js (server-side)
  -connect to localhost:3000
