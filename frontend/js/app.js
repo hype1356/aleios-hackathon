@@ -93,11 +93,15 @@ const getData = () => {
                 }
                 row.innerHTML += "<div class='bar' style='height: 40px; width: "+fractional*660+`px; background-color: ${colour}'></div>`
                 var current_circle = document.querySelector(".circle"+i[0]);
-                current_circle.style.backgroundColor = `${colour}${parseInt(fractional*255).toString(16).padStart(2,"0")}`;
-                current_circle.style.height = (100 * fractional)+"px";
-                current_circle.style.width = (100 * fractional)+"px";
-                current_circle.style.marginLeft = (-(100 * fractional)/2)+"px"
-                current_circle.style.marginTop = (-(100 * fractional)/2)+"px"
+                current_circle.style.backgroundColor = `${colour}`;
+                current_circle.style.height = (250 * fractional)+"px";
+                current_circle.style.width = "20px";
+                current_circle.style.transformOrigin = `50% 100%`
+                current_circle.style.marginLeft = "-10px"
+                current_circle.style.marginTop = (-(250 * fractional))+"px"
+                console.log(current_circle.style.transform)
+                if(current_circle.style.transform === "") current_circle.style.transform = "rotateZ(0deg)  scale(1.0,1.0)"
+                current_circle.style.zIndex = zIndexCalc(current_circle)
             }
             var average = Math.round(total/values.length)
             document.getElementById("stats").innerHTML = `Average: ${average}     Total: ${total}`
@@ -120,7 +124,7 @@ const showMap = () => {
     let circles = getCircles()
     output += `
         <div class="card" style="transform: rotateX(60deg) perspective(300px)">
-            <img class="card--img" src=${map_link} \>
+            <img class="card--img" style="z-index: -1000" src=${map_link} \>
             <div class="circles">${circles}</div>
             </img>
         </div>
@@ -139,7 +143,7 @@ const getCircles = () => {
 }
 
 const getCircle = (label, x, y) => {
-    return `<div class="circle${label} heatcircle" style="left:${x}px;top:${y}px"></div>`
+    return `<div class="circle${label} heatcircle" style="left:${x}px;top:${y}px;"></div>`
 }
 
 function toggleHeatmap () {
@@ -155,7 +159,8 @@ function toggleHeatmap () {
 /*Mouse Dragging*/
 
 function dragElement(element) {
-  var deg = 0
+  var degZ = 0
+  var degX = 0
   var pos1 = 0
   var pos2 = 0
   var pos3 = 0
@@ -183,12 +188,16 @@ function dragElement(element) {
     pos5 = e.clientY
     pos3 = pos5 - (container.offsetTop + (container.offsetHeight / 2))
     pos6 = pos2 - (container.offsetLeft + (container.offsetWidth / 2))
-    deg += (pos3 > 0 ? 1 : -1) * pos1
-    deg += (pos6 < 0 ? 1 : -1) * pos4
+    degZ += (pos3 > 0 ? 1 : -1) * pos1
+    degX += (pos6 < 0 ? 1 : -1) * pos4
     // set the element's new position:
     var str = element.style.transform.split(" ")
-    var zDeg = "rotateZ("+deg+"deg)"
-    deg %= 360
+    var xDeg = "rotateX("+degX+"deg)"
+    var zDeg = "rotateZ("+degZ+"deg)"
+    degZ %= 360
+    degX = Math.max(degX, 10)
+    degX = Math.min(degX, 80)
+    str[0] = xDeg
     if(str.length >= 2){
         str[2] = zDeg
     }
@@ -197,6 +206,16 @@ function dragElement(element) {
     }
     str = str.join(" ")
     element.style.transform = str
+    var listOfCircles = document.querySelectorAll(".heatcircle")
+    for(var e of listOfCircles) {
+      e.style.zIndex = zIndexCalc(e)
+      var oldTransform = e.style.transform.split("  ")
+      var zDegCirc = "rotateZ("+(-degZ)+"deg)"
+      var scale = "scale(1.0,"+(2 ** ((degX)/10)/80)+")"
+      oldTransform[0] = zDegCirc
+      oldTransform[1] = scale
+      e.style.transform = oldTransform.join("  ")
+    }
   }
 
   function closeDragElement() {
@@ -204,6 +223,10 @@ function dragElement(element) {
     document.onmouseup = null;
     document.onmousemove = null;
   }
+}
+
+function zIndexCalc (e) {
+  return Math.round(-container.getBoundingClientRect().top + e.getBoundingClientRect().top + e.getBoundingClientRect().height)
 }
 
 document.addEventListener("DOMContentLoaded", writeWebsite);

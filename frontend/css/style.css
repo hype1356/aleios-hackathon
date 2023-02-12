@@ -65,12 +65,14 @@ input[type=button]:hover {
 }
 .card--img {
   border-radius: 50%;
+  position: relative;
+  transform-style: preserve-3d;
 }
 .heatcircle {
   position: absolute;
   background-color: red;
-  border-radius: 50%;
   z-index: 1;
+  transform-style: preserve-3d;
 }
 .table-container {
   margin: auto;
