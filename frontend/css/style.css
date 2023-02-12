@@ -66,6 +66,14 @@ input[type=button]:hover {
 .card--img {
   border-radius: 50%;
 }
+.heatcircle {
+  position: absolute;
+  background-color: red;
+  height: 10px;
+  width: 10px;
+  border-radius: 50%;
+  z-index: 1;
+}
 .table-container {
   margin: auto;
   max-width: 1200px;

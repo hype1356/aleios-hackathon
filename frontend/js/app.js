@@ -102,9 +102,7 @@ const showMap = () => {
     output += `
         <div class="card" style="transform: rotateX(60deg) perspective(300px)">
             <img class="card--img" src=${map_link} \>
-            <div class="bars">
-
-            </div>
+            <div class="circles">${circles}</div>
             </img>
         </div>
         ` //change rot
@@ -123,7 +121,7 @@ const getCircles = () => {
 }
 
 const getCircle = (label, x, y) => {
-    return `<div class="${label}" style="left:${x};top:${y}"></div>`
+    return `<div class="${label} heatcircle" style="left:${x}px;top:${y}px"></div>`
 }
 
 /*Mouse Dragging*/
