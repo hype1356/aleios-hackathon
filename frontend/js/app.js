@@ -97,7 +97,7 @@ const resetButtons = (event) => {
 
 const showMap = () => {
     let output = ""
-    let square = `<div class="square"style=height:1000px;width:10px;background-color:blue></div>`
+    let circles = getCircles()
     output += `
         <div class="card" style="transform: rotateX(60deg) perspective(300px)">
             <img class="card--img" src=${map_link} \>
@@ -108,6 +108,20 @@ const showMap = () => {
         </div>
         ` //change rot
     container.innerHTML = output
+}
+
+const getCircles = () => {
+    var output = ""
+    for(var key in coordDict){
+        var data = coordDict[key]
+        output += getCircle(key, data[0], data[1]) + "\n"
+    }
+    console.log(output)
+    return output
+}
+
+function getCircle(label, x, y){
+    return `<div class="${label}" style="left:${x};top:${y}"></div>`
 }
 
 /*Mouse Dragging*/
