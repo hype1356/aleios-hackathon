@@ -92,7 +92,6 @@ const getData = () => {
                 row.innerHTML += "<div class='bar' style='height: 40px; width: "+fractional*660+`px; background-color: ${colour}'></div>`
                 var current_circle = document.querySelector(".circle"+i[0]);
                 current_circle.style.backgroundColor = `${colour}${parseInt(fractional*255).toString(16).padStart(2,"0")}`;
-                console.log(current_circle.style.backgroundColor)
                 current_circle.style.height = (100 * fractional)+"px";
                 current_circle.style.width = (100 * fractional)+"px";
                 current_circle.style.marginLeft = (-(100 * fractional)/2)+"px"
