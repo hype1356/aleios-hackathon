@@ -44,7 +44,6 @@ const getCoord = () => {
         temp = x.split(", ")
         coordDict[temp[0]] = [temp[1], temp[2].split("\r")[0]]
       }
-      console.log(coordDict)
     }
   }
   http.send()
@@ -111,17 +110,15 @@ const showMap = () => {
 
 const getCircles = () => {
     var output = ""
-    console.log(coordDict)
     for(var key in coordDict){
         var data = coordDict[key]
         output += getCircle(key, data[0], data[1]) + "\n"
     }
-    console.log(output)
     return output
 }
 
 const getCircle = (label, x, y) => {
-    return `<div class="${label} heatcircle" style="left:${x}px;top:${y}px"></div>`
+    return `<div class="${label}circle heatcircle" style="left:${x}px;top:${y}px"></div>`
 }
 
 /*Mouse Dragging*/
