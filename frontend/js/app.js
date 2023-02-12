@@ -7,6 +7,7 @@ var tableButtons = document.querySelectorAll("th button")
 var data = []
 var length = "day";
 var type = "electricity"
+var coordDict = {}
 
 const writeWebsite = () => {
     showMap()
@@ -30,6 +31,21 @@ function changeLength(leng) {
             break
     }
     getData()
+}
+
+function getCoord() {
+  http.open("GET", "images/coordinate_mappings", true);
+  http.onreadystatechange = function() {
+    if (http.readyState === XMLHttpRequest.DONE && http.status===200) {
+      lines = http.responseText.split("\n")
+      for (x of lines) {
+        temp = x.split(",")
+        coordDict[temp[0]] = [temp[1], temp[2]]
+      }
+      console.log(coordDict)
+    }
+  }
+  http.send()
 }
 
 function changeType(typ) {
@@ -148,4 +164,4 @@ function dragElement(element) {
   }
 }
 
-document.addEventListener("DOMContentLoaded", writeWebsite, getData());
+document.addEventListener("DOMContentLoaded", writeWebsite, getData(), getCoord());
