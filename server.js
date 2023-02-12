@@ -8,7 +8,7 @@ function readCSVFile(file) {
   var lines = []
   lines = fs.readFileSync(file).toString().split('\n');
   for (var count = 1; count<lines.length - 1; count++) {
-    buildingNumber = parseInt(lines[count].split(',')[0]);
+    buildingNumber = lines[count].split(',')[0];
     var line = lines[count].split(',');
     line[line.length-1] = line[line.length-1].split('\r')[0];
     line.shift(); 
