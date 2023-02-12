@@ -33,7 +33,7 @@ function changeLength(leng) {
     getData()
 }
 
-function getCoord() {
+const getCoord = () => {
   http.open("GET", "images/coordinate_mappings", true);
   http.onreadystatechange = function() {
     if (http.readyState === XMLHttpRequest.DONE && http.status===200) {
@@ -62,7 +62,7 @@ function changeType(typ) {
     getData()
 }
 
-function getData() {
+const getData = () => {
     url = "/data/" + type + "/" + length
     http.open("GET", url, true);
     http.onreadystatechange = function() {
@@ -86,13 +86,13 @@ function getData() {
     http.send();
 }
   
-  const resetButtons = (event) => {
-    [...tableButtons].map((button) => {
-      if (button !== event.target) {
-        button.removeAttribute("data-dir");
-      }
-    });
-  };
+const resetButtons = (event) => {
+  [...tableButtons].map((button) => {
+    if (button !== event.target) {
+      button.removeAttribute("data-dir");
+    }
+  });
+};
   
 
 const showMap = () => {
@@ -164,4 +164,4 @@ function dragElement(element) {
   }
 }
 
-document.addEventListener("DOMContentLoaded", writeWebsite, getData(), getCoord());
+document.addEventListener("DOMContentLoaded", writeWebsite, getCoord(), getData());
