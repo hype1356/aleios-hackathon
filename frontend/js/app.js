@@ -80,9 +80,10 @@ const getData = () => {
                 celli.appendChild(texti)
                 cellj.appendChild(textj)
                 var fractional = i[1]/values[0][1]
+                //var colour = 
                 row.innerHTML += "<div class='bar' style='height: 40px; width: "+fractional*660+"px; background-color: blue'></div>"
                 var current_circle = document.querySelector(".circle"+i[0]);
-                current_circle.style.color = "rgba(255, 0, 0, ${fractional})";
+                current_circle.style.backgroundColor = `rgba(255, 0, 0, ${fractional})`;
                 current_circle.style.height = (100 * fractional)+"px";
                 current_circle.style.width = (100 * fractional)+"px";
                 current_circle.style.marginLeft = (-(100 * fractional)/2)+"px"
