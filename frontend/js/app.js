@@ -80,7 +80,16 @@ const getData = () => {
                 celli.appendChild(texti)
                 cellj.appendChild(textj)
                 var fractional = i[1]/values[0][1]
-                //var colour = 
+                var colourPatttern = int(fractional * 510)
+                if (colourPatttern < 256)
+                {                  
+                  var colour = `#${colourPatttern.toSting(16)}FF00`;
+                  console.log(colour)
+                }
+                else{
+                  var colour = `#FF${(255 - (colourPatttern - 255)).toString(16)}00`;
+                  console.log(colour)
+                }
                 row.innerHTML += "<div class='bar' style='height: 40px; width: "+fractional*660+"px; background-color: blue'></div>"
                 var current_circle = document.querySelector(".circle"+i[0]);
                 current_circle.style.backgroundColor = `rgba(255, 0, 0, ${fractional})`;
