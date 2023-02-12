@@ -10,6 +10,8 @@ var type = "electricity"
 var coordDict = {}
 
 const writeWebsite = () => {
+    getCoord()
+    getData()
     showMap()
     dragElement(document.querySelector(".card"))
 }
@@ -34,7 +36,7 @@ function changeLength(leng) {
 }
 
 const getCoord = () => {
-  http.open("GET", "images/coordinate_mappings", true);
+  http.open("GET", "images/coordinate_mappings", false);
   http.onreadystatechange = function() {
     if (http.readyState === XMLHttpRequest.DONE && http.status===200) {
       lines = http.responseText.split("\n")
@@ -69,7 +71,6 @@ const getData = () => {
         if (http.readyState === XMLHttpRequest.DONE && http.status === 200) {
             var values = JSON.parse(http.responseText);
             data = values
-            console.log(data);
             table.innerHTML = '';
             for (let i of values) {
                 row = table.insertRow()
@@ -112,6 +113,7 @@ const showMap = () => {
 
 const getCircles = () => {
     var output = ""
+    console.log(coordDict)
     for(var key in coordDict){
         var data = coordDict[key]
         output += getCircle(key, data[0], data[1]) + "\n"
@@ -120,7 +122,7 @@ const getCircles = () => {
     return output
 }
 
-function getCircle(label, x, y){
+const getCircle = (label, x, y) => {
     return `<div class="${label}" style="left:${x};top:${y}"></div>`
 }
 
@@ -178,4 +180,4 @@ function dragElement(element) {
   }
 }
 
-document.addEventListener("DOMContentLoaded", writeWebsite, getCoord(), getData());
+document.addEventListener("DOMContentLoaded", writeWebsite);
