@@ -20,16 +20,16 @@ function changeLength(leng) {
     length = leng
     switch(leng) {
         case "day":
-            document.getElementById("currLength").innerHTML = "24H"
+            document.getElementById("currLength").innerHTML = `24H ${type}`
             break
         case "week":
-            document.getElementById("currLength").innerHTML = "7D"
+            document.getElementById("currLength").innerHTML = `7D ${type}`
             break
         case "month":
-            document.getElementById("currLength").innerHTML = "1M"
+            document.getElementById("currLength").innerHTML = `1M ${type}`
             break
         case "year":
-            document.getElementById("currLength").innerHTML = "1Y"
+            document.getElementById("currLength").innerHTML = `1Y ${type}`
             break
     }
     getData()
@@ -60,6 +60,7 @@ function changeType(typ) {
         document.getElementById("Usage").innerHTML = "Water Usage (L)"
         break
     }
+    changeLength(length)
     getData()
 }
 
@@ -121,6 +122,7 @@ const showMap = () => {
             <div class="circles">${circles}</div>
             </img>
         </div>
+        <input type="button" value="Toggle Heatmap" onclick="toggleHeatmap()"/>
         ` //change rot
     container.innerHTML = output
 }
@@ -136,6 +138,16 @@ const getCircles = () => {
 
 const getCircle = (label, x, y) => {
     return `<div class="circle${label} heatcircle" style="left:${x}px;top:${y}px"></div>`
+}
+
+function toggleHeatmap () {
+    const e = document.querySelector(".circles")
+    if(e.style.display == "none"){
+        e.style.display = "inline"
+    }
+    else{
+        e.style.display = "none"
+    }
 }
 
 /*Mouse Dragging*/
