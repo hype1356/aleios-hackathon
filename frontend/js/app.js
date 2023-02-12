@@ -112,6 +112,7 @@ const showMap = () => {
             <div class="circles">${circles}</div>
             </img>
         </div>
+        <input type="button" value="Toggle Heatmap" onclick="toggleHeatmap()"/>
         ` //change rot
     container.innerHTML = output
 }
@@ -127,6 +128,16 @@ const getCircles = () => {
 
 const getCircle = (label, x, y) => {
     return `<div class="circle${label} heatcircle" style="left:${x}px;top:${y}px"></div>`
+}
+
+function toggleHeatmap () {
+    const e = document.querySelector(".circles")
+    if(e.style.display == "none"){
+        e.style.display = "inline"
+    }
+    else{
+        e.style.display = "none"
+    }
 }
 
 /*Mouse Dragging*/
