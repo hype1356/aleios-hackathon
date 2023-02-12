@@ -81,19 +81,18 @@ const getData = () => {
                 celli.appendChild(texti)
                 cellj.appendChild(textj)
                 var fractional = i[1]/values[0][1]
-                var colourPatttern = int(fractional * 510)
+                var colourPatttern = parseInt(fractional * 510)
                 if (colourPatttern < 256)
                 {                  
-                  var colour = `#${colourPatttern.toSting(16)}FF00`;
-                  console.log(colour)
+                  var colour = `#${colourPatttern.toString(16).padStart(2,"0")}FF00`;
                 }
                 else{
-                  var colour = `#FF${(255 - (colourPatttern - 255)).toString(16)}00`;
-                  console.log(colour)
+                  var colour = `#FF${(255 - (colourPatttern - 255)).toString(16).padStart(2,"0")}00`;
                 }
-                row.innerHTML += "<div class='bar' style='height: 40px; width: "+fractional*660+"px; background-color: blue'></div>"
+                row.innerHTML += "<div class='bar' style='height: 40px; width: "+fractional*660+`px; background-color: ${colour}'></div>`
                 var current_circle = document.querySelector(".circle"+i[0]);
-                current_circle.style.backgroundColor = `rgba(255, 0, 0, ${fractional})`;
+                current_circle.style.backgroundColor = `${colour}${parseInt(fractional*255).toString(16).padStart(2,"0")}`;
+                console.log(current_circle.style.backgroundColor)
                 current_circle.style.height = (100 * fractional)+"px";
                 current_circle.style.width = (100 * fractional)+"px";
                 current_circle.style.marginLeft = (-(100 * fractional)/2)+"px"
