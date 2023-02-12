@@ -119,7 +119,7 @@ const showMap = () => {
     let output = ""
     let circles = getCircles()
     output += `
-        <div class="card">
+        <div class="card" style="transform: rotateX(60deg) perspective(300px)">
             <img class="card--img" src=${map_link} \>
             <div class="circles">${circles}</div>
             </img>
@@ -176,7 +176,27 @@ function dragElement(element) {
   function elementDrag(e) {
     e = e || window.event;
     e.preventDefault();
-    
+    // calculate the new cursor position:
+    pos1 = pos2 - e.clientX
+    pos2 = e.clientX
+    pos4 = pos5 - e.clientY
+    pos5 = e.clientY
+    pos3 = pos5 - (container.offsetTop + (container.offsetHeight / 2))
+    pos6 = pos2 - (container.offsetLeft + (container.offsetWidth / 2))
+    deg += (pos3 > 0 ? 1 : -1) * pos1
+    deg += (pos6 < 0 ? 1 : -1) * pos4
+    // set the element's new position:
+    var str = element.style.transform.split(" ")
+    var zDeg = "rotateZ("+deg+"deg)"
+    deg %= 360
+    if(str.length >= 2){
+        str[2] = zDeg
+    }
+    else{
+        str.push(zDeg)
+    }
+    str = str.join(" ")
+    element.style.transform = str
   }
 
   function closeDragElement() {
