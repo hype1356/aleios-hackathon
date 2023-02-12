@@ -79,7 +79,12 @@ const getData = () => {
                 textj = document.createTextNode(i[1])
                 celli.appendChild(texti)
                 cellj.appendChild(textj)
-                row.innerHTML += "<div class='bar' style='height: 40px; width: "+(i[1]/values[0][1])*660+"px; background-color: blue'></div>"
+                var fractional = i[1]/values[0][1]
+                row.innerHTML += "<div class='bar' style='height: 40px; width: "+fractional*660+"px; background-color: blue'></div>"
+                var current_circle = document.querySelector(i[0]+"circle")
+                current_circle.style.color = rgba(255, 0, 0, fractional)
+                current_circle.style.height = (100 * fractional)px;
+                current_circle.style.width = (100 * fractional)px;
             }
         }
     };
