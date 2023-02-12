@@ -41,8 +41,8 @@ const getCoord = () => {
     if (http.readyState === XMLHttpRequest.DONE && http.status===200) {
       lines = http.responseText.split("\n")
       for (x of lines) {
-        temp = x.split(",")
-        coordDict[temp[0]] = [temp[1], temp[2]]
+        temp = x.split(", ")
+        coordDict[temp[0]] = [temp[1], temp[2].split("\r")[0]]
       }
       console.log(coordDict)
     }
