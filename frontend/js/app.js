@@ -83,8 +83,8 @@ const getData = () => {
                 row.innerHTML += "<div class='bar' style='height: 40px; width: "+fractional*660+"px; background-color: blue'></div>"
                 var current_circle = document.querySelector(i[0]+"circle")
                 current_circle.style.color = rgba(255, 0, 0, fractional)
-                current_circle.style.height = (100 * fractional)px;
-                current_circle.style.width = (100 * fractional)px;
+                current_circle.style.height = (100 * fractional)+"px";
+                current_circle.style.width = (100 * fractional)+"px";
             }
         }
     };
