@@ -69,10 +69,12 @@ const getData = () => {
     http.open("GET", url, true);
     http.onreadystatechange = function() {
         if (http.readyState === XMLHttpRequest.DONE && http.status === 200) {
+            var total = 0;
             var values = JSON.parse(http.responseText);
             data = values
             table.innerHTML = '';
             for (let i of values) {
+                total += parseInt(i[1])
                 row = table.insertRow()
                 celli = row.insertCell()
                 cellj = row.insertCell()
@@ -80,7 +82,7 @@ const getData = () => {
                 textj = document.createTextNode(i[1])
                 celli.appendChild(texti)
                 cellj.appendChild(textj)
-                var fractional = i[1]/values[0][1]
+                var fractional = (i[1]-values[values.length-1][1]+1)/(values[0][1]-values[values.length-1][1]+1)
                 var colourPatttern = parseInt(fractional * 510)
                 if (colourPatttern < 256)
                 {                  
@@ -97,6 +99,8 @@ const getData = () => {
                 current_circle.style.marginLeft = (-(100 * fractional)/2)+"px"
                 current_circle.style.marginTop = (-(100 * fractional)/2)+"px"
             }
+            var average = Math.round(total/values.length)
+            document.getElementById("stats").innerHTML = `Average: ${average}     Total: ${total}`
         }
     };
     http.send();
