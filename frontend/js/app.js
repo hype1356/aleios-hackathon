@@ -11,8 +11,8 @@ var coordDict = {}
 
 const writeWebsite = () => {
     getCoord()
-    getData()
     showMap()
+    getData()
     dragElement(document.querySelector(".card"))
 }
 
@@ -81,10 +81,12 @@ const getData = () => {
                 cellj.appendChild(textj)
                 var fractional = i[1]/values[0][1]
                 row.innerHTML += "<div class='bar' style='height: 40px; width: "+fractional*660+"px; background-color: blue'></div>"
-                var current_circle = document.querySelector(i[0]+"circle")
-                current_circle.style.color = rgba(255, 0, 0, fractional)
+                var current_circle = document.querySelector(".circle"+i[0]);
+                current_circle.style.color = "rgba(255, 0, 0, ${fractional})";
                 current_circle.style.height = (100 * fractional)+"px";
                 current_circle.style.width = (100 * fractional)+"px";
+                current_circle.style.marginLeft = (-(100 * fractional)/2)+"px"
+                current_circle.style.marginTop = (-(100 * fractional)/2)+"px"
             }
         }
     };
@@ -123,7 +125,7 @@ const getCircles = () => {
 }
 
 const getCircle = (label, x, y) => {
-    return `<div class="${label}circle heatcircle" style="left:${x}px;top:${y}px"></div>`
+    return `<div class="circle${label} heatcircle" style="left:${x}px;top:${y}px"></div>`
 }
 
 /*Mouse Dragging*/
